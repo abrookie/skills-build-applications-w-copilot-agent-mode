@@ -1,12 +1,19 @@
 import { useEffect, useState } from 'react';
 import { fetchList } from '../utils/api';
 
+// `VITE_CODESPACE_NAME` must be defined (e.g. in `.env.local`) to resolve to a real
+// Codespaces forwarding URL. Falls back to localhost when unset.
+const codespaceName = import.meta.env.VITE_CODESPACE_NAME;
+const LEADERBOARD_API_URL = codespaceName
+  ? `https://${codespaceName}-8000.app.github.dev/api/leaderboard`
+  : 'http://localhost:8000/api/leaderboard';
+
 function Leaderboard() {
   const [entries, setEntries] = useState([]);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetchList('/api/leaderboard/')
+    fetchList(LEADERBOARD_API_URL)
       .then(setEntries)
       .catch((err) => setError(err.message));
   }, []);

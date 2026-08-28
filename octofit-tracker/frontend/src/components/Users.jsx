@@ -1,12 +1,19 @@
 import { useEffect, useState } from 'react';
 import { fetchList } from '../utils/api';
 
+// `VITE_CODESPACE_NAME` must be defined (e.g. in `.env.local`) to resolve to a real
+// Codespaces forwarding URL. Falls back to localhost when unset.
+const codespaceName = import.meta.env.VITE_CODESPACE_NAME;
+const USERS_API_URL = codespaceName
+  ? `https://${codespaceName}-8000.app.github.dev/api/users`
+  : 'http://localhost:8000/api/users';
+
 function Users() {
   const [users, setUsers] = useState([]);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetchList('/api/users/')
+    fetchList(USERS_API_URL)
       .then(setUsers)
       .catch((err) => setError(err.message));
   }, []);
