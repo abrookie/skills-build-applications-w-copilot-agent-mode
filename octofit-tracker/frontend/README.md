@@ -2,6 +2,25 @@
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
+## Environment variables
+
+This app calls the Octofit Tracker API at:
+
+```
+https://${VITE_CODESPACE_NAME}-8000.app.github.dev/api/[component]/
+```
+
+`VITE_CODESPACE_NAME` must be defined for this to resolve correctly. In a GitHub Codespace,
+copy `.env.example` to `.env.local` and set it to the value of the `CODESPACE_NAME` environment
+variable:
+
+```bash
+echo "VITE_CODESPACE_NAME=$CODESPACE_NAME" > octofit-tracker/frontend/.env.local
+```
+
+If `VITE_CODESPACE_NAME` is unset, the app falls back to `http://localhost:8000/api` instead of
+requesting `https://undefined-8000...`.
+
 Currently, two official plugins are available:
 
 - [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
