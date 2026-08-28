@@ -17,10 +17,11 @@ export function extractList(data) {
 
 // `path` must be an absolute endpoint path, e.g. `/api/activities`.
 export async function fetchList(path) {
-  const response = await fetch(`${API_ORIGIN}${path}/`);
+  const response = await fetch(`${API_ORIGIN}${path}`);
   if (!response.ok) {
     throw new Error(`Request to ${path} failed with status ${response.status}`);
   }
+
   const data = await response.json();
   return extractList(data);
 }

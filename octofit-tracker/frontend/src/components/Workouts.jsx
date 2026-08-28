@@ -6,7 +6,7 @@ function Workouts() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetchList('/api/workouts')
+    fetchList('/api/workouts/')
       .then(setWorkouts)
       .catch((err) => setError(err.message));
   }, []);

@@ -6,7 +6,7 @@ function Activities() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetchList('/api/activities')
+    fetchList('/api/activities/')
       .then(setActivities)
       .catch((err) => setError(err.message));
   }, []);
