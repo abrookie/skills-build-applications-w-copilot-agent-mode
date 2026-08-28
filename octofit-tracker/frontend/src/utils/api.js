@@ -4,9 +4,9 @@
 // app never requests `https://undefined-8000...`.
 const codespaceName = import.meta.env.VITE_CODESPACE_NAME;
 
-export const API_BASE_URL = codespaceName
-  ? `https://${codespaceName}-8000.app.github.dev/api`
-  : 'http://localhost:8000/api';
+export const API_ORIGIN = codespaceName
+  ? `https://${codespaceName}-8000.app.github.dev`
+  : 'http://localhost:8000';
 
 // Normalizes Express array responses and paginated `{ results: [...] }` shapes.
 export function extractList(data) {
@@ -15,10 +15,11 @@ export function extractList(data) {
   return [];
 }
 
-export async function fetchList(resource) {
-  const response = await fetch(`${API_BASE_URL}/${resource}/`);
+// `path` must be an absolute endpoint path, e.g. `/api/activities`.
+export async function fetchList(path) {
+  const response = await fetch(`${API_ORIGIN}${path}/`);
   if (!response.ok) {
-    throw new Error(`Request to ${resource} failed with status ${response.status}`);
+    throw new Error(`Request to ${path} failed with status ${response.status}`);
   }
   const data = await response.json();
   return extractList(data);

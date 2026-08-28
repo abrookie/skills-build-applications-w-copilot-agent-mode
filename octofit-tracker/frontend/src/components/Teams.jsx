@@ -6,7 +6,7 @@ function Teams() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetchList('teams')
+    fetchList('/api/teams')
       .then(setTeams)
       .catch((err) => setError(err.message));
   }, []);

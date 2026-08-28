@@ -6,7 +6,7 @@ function Leaderboard() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetchList('leaderboard')
+    fetchList('/api/leaderboard')
       .then(setEntries)
       .catch((err) => setError(err.message));
   }, []);

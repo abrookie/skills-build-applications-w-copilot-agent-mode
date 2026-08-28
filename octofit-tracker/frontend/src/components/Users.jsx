@@ -6,7 +6,7 @@ function Users() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetchList('users')
+    fetchList('/api/users')
       .then(setUsers)
       .catch((err) => setError(err.message));
   }, []);
